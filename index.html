@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>人類最糟糕的發明（塑料袋）— 普通話朗讀練習（作品50號）</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- pinyin-pro library for automatic Pinyin conversion -->
+    <script src="https://cdn.jsdelivr.net/npm/pinyin-pro@3.18.3/dist/index.js"></script>
+    <!-- Canvas Confetti -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts for Unified Classical Chinese Serif Aesthetics -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600;700;900&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        eco: {
+                            sand: '#E8F3EE',
+                            bg: '#F4F9F6',
+                            card: '#FFFFFF',
+                            blue: '#163A35',
+                            deepblue: '#0D2622',
+                            green: '#246A52',
+                            lightgreen: '#E1EFEA',
+                            gold: '#D98A2B',
+                            sun: '#C84B31',
+                            border: '#C2D8CE'
+                        }
+                    },
+                    fontFamily: {
+                        unified: ['"Noto Serif TC"', 'STKaiti', 'KaiTi', 'DFKai-SB', '標楷體', 'serif']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Unified typography */
+        * {
+            font-family: 'Noto Serif TC', 'STKaiti', 'KaiTi', 'DFKai-SB', '標楷體', serif !important;
+        }
+
+        body {
+            background-color: #F4F9F6;
+            background-image: radial-gradient(#C2D8CE 0.75px, transparent 0.75px), radial-gradient(#C2D8CE 0.75px, #F4F9F6 0.75px);
+            background-size: 30px 30px;
+            background-position: 0 0, 15px 15px;
+            color: #162B27;
+        }
+
+        /* Border effect */
+        .eco-border {
+            border: 2px solid #D98A2B;
+            box-shadow: 0 0 0 4px #F4F9F6, 0 0 0 6px #163A35, 0 10px 25px rgba(0,0,0,0.12);
+        }
+
+        /* Pinyin layout overrides */
+        ruby {
+            ruby-position: over;
+            font-size: inherit;
+        }
+        rt {
+            font-size: 0.48em;
+            color: #163A35;
+            font-weight: 700;
+            letter-spacing: 0;
+            transform: translateY(-2px);
+            user-select: none;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #E8F3EE;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #246A52;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #163A35;
+        }
+
+        .active-unit-card {
+            background: linear-gradient(120deg, rgba(217, 138, 43, 0.25) 0%, rgba(36, 106, 82, 0.15) 100%);
+            border-left: 6px solid #D98A2B;
+        }
+
+        .eco-leaf-pattern {
+            background-image: url("data:image/svg+xml,%3Csvg width='80' height='40' viewBox='0 0 80 40' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='40' cy='15' r='7' fill='%23D98A2B' fill-opacity='0.22'/%3E%3Cpath d='M10 38 Q 25 15 40 38 Q 55 15 70 38 Z' fill='%23246A52' fill-opacity='0.18'/%3E%3C/svg%3E");
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between text-gray-800 antialiased selection:bg-eco-gold selection:text-white">
+
+    <!-- TOP HEADER -->
+    <header class="bg-eco-deepblue text-eco-sand shadow-lg border-b-4 border-eco-gold relative overflow-hidden">
+        <div class="absolute inset-0 eco-leaf-pattern opacity-50"></div>
+        <div class="max-w-7xl mx-auto px-4 py-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center relative z-10 gap-3">
+            <div class="flex items-center space-x-3 text-center md:text-left">
+                <i class="fa-solid fa-leaf text-eco-gold text-3xl sm:text-4xl animate-pulse"></i>
+                <div>
+                    <h1 class="text-2xl sm:text-3xl font-black tracking-wide text-eco-sand drop-shadow">
+                        人類最糟糕的發明 — 普通話朗讀練習（作品50號）
+                    </h1>
+                    <p class="text-xs sm:text-sm text-eco-sand/80">共 10 個朗讀單元 · 隨機抽取朗讀者</p>
+                </div>
+            </div>
+
+            <!-- Top Controls (Only visible in practice view) -->
+            <div id="topHeaderControls" class="flex flex-wrap items-center justify-center gap-2 text-xs sm:text-sm hidden">
+                <button onclick="togglePinyin()" id="pinyinBtn" class="bg-eco-gold hover:bg-amber-600 text-eco-deepblue font-bold px-3 py-2 rounded-lg shadow transition flex items-center gap-1.5 border border-amber-200">
+                    <i class="fa-solid fa-language text-base"></i>
+                    <span>拼音: <span id="pinyinStatus">開啟</span></span>
+                </button>
+                <button onclick="returnToSetupView()" class="bg-eco-green hover:bg-emerald-800 text-white font-bold px-3 py-2 rounded-lg shadow transition flex items-center gap-1.5 border border-green-300">
+                    <i class="fa-solid fa-users-gear"></i>
+                    <span>管理名單 / 返回修改</span>
+                </button>
+                <button onclick="resetProgress()" class="bg-amber-800 hover:bg-amber-900 text-eco-sand px-3 py-2 rounded-lg shadow transition flex items-center gap-1">
+                    <i class="fa-solid fa-rotate-left"></i>
+                    <span>重新開始</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- STEP 1: INITIAL SETUP VIEW -->
+    <div id="setupView" class="max-w-3xl mx-auto px-4 py-10 flex-grow w-full flex items-center justify-center">
+        <div class="bg-eco-card rounded-2xl p-6 sm:p-10 eco-border w-full shadow-2xl relative">
+            <div class="text-center mb-6 border-b border-eco-border pb-4">
+                <h2 class="text-2xl sm:text-3xl font-bold text-eco-blue mb-2">
+                    歡迎來到普通話朗讀課堂
+                </h2>
+                <p class="text-sm text-gray-600">請先在下方輸入個人或小組名字，再開始進行朗讀練習。</p>
+            </div>
+
+            <div class="space-y-5">
+                <div>
+                    <label class="block text-base font-bold text-eco-blue mb-2 flex items-center gap-2">
+                        <i class="fa-solid fa-user-pen text-eco-gold"></i>
+                        輸入個人或小組名單（每行一個名稱）：
+                    </label>
+                    <textarea id="participantsInputSetup" rows="6" class="w-full border-2 border-eco-border rounded-xl p-4 text-base focus:outline-none focus:border-eco-gold bg-white leading-relaxed" placeholder="請輸入名字，例如：&#10;第一小組&#10;第二小組&#10;張小明&#10;李華..."></textarea>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-bold text-gray-700 mb-1">
+                        抽取模式設定：
+                    </label>
+                    <div class="flex gap-6 text-sm bg-eco-lightgreen/70 p-3 rounded-xl border border-eco-border">
+                        <label class="flex items-center gap-2 cursor-pointer">
+                            <input type="radio" name="pickModeSetup" value="unique" checked class="text-eco-green focus:ring-eco-gold">
+                            <span class="font-bold text-gray-800">隨機不重複（人人均有朗讀機會）</span>
+                        </label>
+                        <label class="flex items-center gap-2 cursor-pointer">
+                            <input type="radio" name="pickModeSetup" value="repeat" class="text-eco-green focus:ring-eco-gold">
+                            <span class="font-bold text-gray-800">完全隨機（可重複抽中）</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="pt-4 flex justify-center">
+                    <button onclick="startReadingPractice()" class="w-full sm:w-2/3 bg-gradient-to-r from-eco-blue to-eco-deepblue hover:from-emerald-950 hover:to-black text-white font-bold py-4 px-8 rounded-xl shadow-xl transition transform hover:-translate-y-0.5 active:translate-y-0 flex items-center justify-center gap-3 text-lg sm:text-xl border-2 border-eco-gold">
+                        <span>確認名單，進入朗讀練習</span>
+                        <i class="fa-solid fa-circle-arrow-right text-eco-gold"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- STEP 2: MAIN READING PRACTICE VIEW -->
+    <main id="practiceView" class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-6 flex-grow w-full grid grid-cols-1 lg:grid-cols-12 gap-6 hidden">
+
+        <!-- LEFT COLUMN: READER SHOWCASE & ACTIVE UNIT CARD (8 Cols) -->
+        <section class="lg:col-span-8 flex flex-col gap-6">
+
+            <!-- READER SELECTION SHOWCASE CARD -->
+            <div class="bg-eco-card rounded-2xl p-4 sm:p-6 eco-border relative overflow-hidden">
+                <div class="flex justify-between items-center border-b border-eco-border/60 pb-3 mb-4">
+                    <span class="text-xs sm:text-sm font-bold text-eco-blue uppercase tracking-wider flex items-center gap-2">
+                        <i class="fa-solid fa-bullhorn text-eco-gold"></i> 當前朗讀單元
+                    </span>
+                    <span id="unitCounter" class="bg-eco-sand text-eco-blue font-bold px-3 py-1 rounded-full text-xs border border-eco-border">
+                        單元 1 / 10
+                    </span>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 items-center mb-4">
+                    <!-- Reader Display -->
+                    <div class="bg-gradient-to-br from-emerald-50 to-amber-50 rounded-xl p-4 text-center border-2 border-dashed border-eco-gold relative">
+                        <span class="text-xs text-gray-500 block mb-1">指定的朗讀者 / 小組</span>
+                        <div id="readerDisplay" class="text-2xl sm:text-3xl font-bold text-eco-blue min-h-[44px] flex items-center justify-center tracking-wider">
+                            點擊按鈕抽取朗讀者
+                        </div>
+                    </div>
+
+                    <!-- Random Pick Button -->
+                    <div class="flex flex-col gap-2">
+                        <button onclick="pickRandomReader()" id="spinBtn" class="w-full bg-gradient-to-r from-eco-blue to-eco-deepblue hover:from-emerald-950 hover:to-black text-white font-bold py-3.5 px-4 rounded-xl shadow-lg transition duration-200 transform hover:-translate-y-0.5 active:translate-y-0 flex items-center justify-center gap-2 text-base sm:text-lg border border-eco-gold">
+                            <i class="fa-solid fa-dice text-eco-gold text-xl animate-bounce"></i>
+                            <span>隨機抽取朗讀者！</span>
+                        </button>
+                        <div class="flex justify-between text-xs text-gray-500 px-1">
+                            <span>模式: <strong id="modeLabel" class="text-eco-green">隨機不重複</strong></span>
+                            <span>參與人數: <strong id="readerCountLabel" class="text-eco-blue">0</strong> 人</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Active Unit Display Card -->
+                <div class="bg-white/95 rounded-xl p-6 sm:p-8 border-2 border-eco-border shadow-inner relative min-h-[260px] flex flex-col justify-between">
+                    <div class="absolute top-2 right-3 text-3xl text-eco-gold/20 select-none font-bold">
+                        環保警鐘
+                    </div>
+
+                    <!-- Unit Text Container with Pinyin support -->
+                    <div id="activeUnitContainer" class="text-xl sm:text-2xl lg:text-3xl leading-relaxed text-gray-800 tracking-wide py-2 transition-all duration-300">
+                        <!-- Dynamic content -->
+                    </div>
+
+                    <!-- Action Bar for Current Unit -->
+                    <div class="flex flex-wrap justify-between items-center gap-3 pt-4 border-t border-gray-100 mt-4">
+                        <div class="flex items-center gap-2">
+                            <button onclick="speakCurrentUnit()" id="speakBtn" class="bg-eco-blue hover:bg-emerald-900 text-white font-bold px-4 py-2 rounded-lg text-sm shadow transition flex items-center gap-2">
+                                <i class="fa-solid fa-volume-high text-eco-gold"></i>
+                                <span>示範朗讀</span>
+                            </button>
+                            <button onclick="stopSpeech()" class="bg-gray-200 hover:bg-gray-300 text-gray-700 font-bold px-3 py-2 rounded-lg text-sm transition">
+                                <i class="fa-solid fa-square"></i>
+                            </button>
+                        </div>
+
+                        <!-- Unit Navigation -->
+                        <div class="flex items-center gap-2">
+                            <button onclick="prevUnit()" id="prevBtn" class="bg-eco-sand hover:bg-emerald-200 text-eco-blue font-bold px-4 py-2 rounded-lg text-sm shadow transition border border-eco-border disabled:opacity-40 disabled:cursor-not-allowed">
+                                <i class="fa-solid fa-chevron-left mr-1"></i> 上一單元
+                            </button>
+                            <button onclick="nextUnit()" id="nextBtn" class="bg-eco-green hover:bg-emerald-800 text-white font-bold px-5 py-2 rounded-lg text-sm shadow transition border border-green-700">
+                                下一單元 <i class="fa-solid fa-chevron-right ml-1"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- READING TIP -->
+            <div class="bg-eco-lightgreen/85 rounded-xl p-4 border border-eco-border flex items-start gap-3">
+                <i class="fa-solid fa-lightbulb text-eco-gold text-xl mt-0.5"></i>
+                <div class="text-xs sm:text-sm text-emerald-950/90 leading-relaxed">
+                    <strong class="font-bold">普通話朗讀提示：</strong> 全文已細分為 10 個朗讀單元。朗讀時請注意語氣的對比與邏輯重音，特別留意「殊榮 (shū róng)」、「塑料 (sù liào)」、「牲畜 (shēng chù)」、「二噁英 (èr ě yīng)」、「氟利昂 (fú lì áng)」等重點詞彙的準確發音。
+                </div>
+            </div>
+        </section>
+
+        <!-- RIGHT COLUMN: FULL TEXT UNITS CONTEXT & READER LIST (4 Cols) -->
+        <section class="lg:col-span-4 flex flex-col gap-6">
+
+            <!-- ALL UNITS CONTEXT VIEW -->
+            <div class="bg-eco-card rounded-2xl p-4 sm:p-5 eco-border flex flex-col h-[480px]">
+                <div class="flex justify-between items-center pb-3 border-b border-eco-border/60 mb-3">
+                    <h3 class="font-bold text-eco-blue flex items-center gap-2 text-sm sm:text-base">
+                        <i class="fa-solid fa-book-open text-eco-gold"></i>
+                        全文單元導覽 (共10單元)
+                    </h3>
+                    <span class="text-xs text-gray-500">點擊快速跳轉</span>
+                </div>
+
+                <div id="fullUnitList" class="overflow-y-auto flex-grow space-y-2 pr-1 text-xs sm:text-sm leading-relaxed">
+                    <!-- Dynamic units list -->
+                </div>
+            </div>
+
+            <!-- PARTICIPANTS POOL LIST -->
+            <div class="bg-eco-card rounded-2xl p-4 sm:p-5 eco-border">
+                <div class="flex justify-between items-center pb-2 border-b border-eco-border/60 mb-3">
+                    <h3 class="font-bold text-eco-blue flex items-center gap-2 text-sm">
+                        <i class="fa-solid fa-users text-eco-gold"></i>
+                        朗讀名單 (<span id="readerPoolCount">0</span>)
+                    </h3>
+                    <button onclick="returnToSetupView()" class="text-xs text-eco-sun hover:underline font-bold">
+                        <i class="fa-solid fa-pen"></i> 修改
+                    </button>
+                </div>
+                <div id="readerTagsContainer" class="flex flex-wrap gap-1.5 max-h-32 overflow-y-auto">
+                    <!-- Dynamic tags -->
+                </div>
+            </div>
+
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-eco-deepblue text-eco-sand text-center py-3 text-xs border-t-2 border-eco-gold">
+        <p>人類最糟糕的發明（塑料袋）— 普通話水平測試朗讀作品課堂互動練習網頁 · 綠色生態與環保警鐘主題設計</p>
+    </footer>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        // Custom 10-Unit Splitting for "The Worst Invention of Mankind (Plastic Bags)"
+        const tenSentenceUnits = [
+            "在一次名人訪問中，被問及上個世紀最重要的發明是什麼時，有人說是電腦，有人說是汽車，等等。",
+            "但新加坡的一位知名人士卻說是冷氣機。他解釋，如果沒有冷氣，熱帶地區如東南亞國家，就不可能有很高的生產力，就不可能達到今天的生活水準。他的回答實事求是，有理有據。",
+            "看了上述報道，我突發奇想：為什麼沒有記者問：“二十世紀最糟糕的發明是什麼？”",
+            "其實二〇〇二年十月中旬，英國的一家報紙就評出了“人類最糟糕的發明”。獲此“殊榮”的，就是人們每天大量使用的塑料袋。",
+            "誕生於上個世紀三十年代的塑料袋，其家族包括用塑料製成的快餐飯盒、包裝紙、餐用杯盤、飲料瓶、酸奶杯、雪糕杯等。",
+            "這些廢棄物形成的垃圾，數量多、體積大、重量輕、不降解，給治理工作帶來很多技術難題和社會問題。",
+            "比如，散落在田間、路邊及草叢中的塑料餐盒，一旦被牲畜吞食，就會危及健康甚至導致死亡。",
+            "填埋廢棄塑料袋、塑料餐盒的土地，不能生長莊稼和樹木，造成土地板結，",
+            "而焚燒處理這些塑料垃圾，則會釋放出多種化學有毒氣體，其中一種稱為二噁英的化合物，毒性極大。",
+            "此外，在生產塑料袋、塑料餐盒的過程中使用的氟利昂，對人體免疫系統和生態環境造成的破壞也極為嚴重。"
+        ];
+
+        // Default Sample Name List
+        const defaultParticipants = [
+            "第一組", "第二組", "第三組", 
+            "第四組", "第五組", "第六組",
+            "第七組", "第八組", "第九組", "第十組"
+        ];
+
+        // State Variables
+        let sentenceUnits = tenSentenceUnits;
+        let participants = [];
+        let remainingParticipants = [];
+        let currentIndex = 0;
+        let showPinyin = true;
+        let isSpinning = false;
+        let synth = window.speechSynthesis;
+
+        // Web Audio API Sound Generator
+        const AudioCtx = window.AudioContext || window.webkitAudioContext;
+        let audioCtx;
+
+        function initAudio() {
+            if (!audioCtx) {
+                audioCtx = new AudioCtx();
+            }
+        }
+
+        function playBeep(freq = 440, duration = 0.08) {
+            try {
+                initAudio();
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                osc.type = 'sine';
+                osc.frequency.value = freq;
+                gain.gain.setValueAtTime(0.1, audioCtx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + duration);
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+                osc.start();
+                osc.stop(audioCtx.currentTime + duration);
+            } catch (e) {}
+        }
+
+        function playFanfare() {
+            try {
+                initAudio();
+                const notes = [261.63, 329.63, 392.00, 523.25];
+                notes.forEach((freq, idx) => {
+                    setTimeout(() => {
+                        playBeep(freq, 0.25);
+                    }, idx * 100);
+                });
+            } catch (e) {}
+        }
+
+        // Initialize App
+        window.onload = function() {
+            document.getElementById('participantsInputSetup').value = defaultParticipants.join('\n');
+            currentIndex = 0;
+        };
+
+        // Step 1 -> Step 2: Confirm Names and Start
+        function startReadingPractice() {
+            const pInput = document.getElementById('participantsInputSetup').value;
+            const parsedP = pInput.split(/[\n,，、]/)
+                .map(s => s.trim())
+                .filter(s => s.length > 0);
+
+            if (parsedP.length === 0) {
+                alert("請輸入至少一個個人或小組名字！");
+                return;
+            }
+
+            participants = parsedP;
+            remainingParticipants = [...participants];
+
+            const isUnique = document.querySelector('input[name="pickModeSetup"]:checked')?.value === 'unique';
+            document.getElementById('modeLabel').textContent = isUnique ? "隨機不重複" : "完全隨機";
+
+            // Switch Screen Views
+            document.getElementById('setupView').classList.add('hidden');
+            document.getElementById('practiceView').classList.remove('hidden');
+            document.getElementById('topHeaderControls').classList.remove('hidden');
+
+            updateUI();
+        }
+
+        // Step 2 -> Step 1: Return to Setup View
+        function returnToSetupView() {
+            stopSpeech();
+            document.getElementById('practiceView').classList.add('hidden');
+            document.getElementById('topHeaderControls').classList.add('hidden');
+            document.getElementById('setupView').classList.remove('hidden');
+        }
+
+        // Update Reading Screen
+        function updateUI() {
+            updateActiveUnitDisplay();
+            updateFullTextSidebar();
+            updateParticipantsPoolUI();
+            updateCounter();
+        }
+
+        // Render Current Unit Display Card
+        function updateActiveUnitDisplay() {
+            const container = document.getElementById('activeUnitContainer');
+            const unitText = sentenceUnits[currentIndex] || "";
+
+            if (!unitText) return;
+
+            if (showPinyin && window.pinyinPro) {
+                try {
+                    const pinyinHtml = pinyinPro.html(unitText);
+                    container.innerHTML = `<div class="leading-relaxed flex flex-wrap gap-y-4 gap-x-1.5">${pinyinHtml}</div>`;
+                } catch (e) {
+                    container.textContent = unitText;
+                }
+            } else {
+                container.textContent = unitText;
+            }
+
+            // Update Navigation Buttons
+            document.getElementById('prevBtn').disabled = currentIndex === 0;
+            document.getElementById('nextBtn').disabled = currentIndex === sentenceUnits.length - 1;
+        }
+
+        // Render Right Sidebar Units List
+        function updateFullTextSidebar() {
+            const list = document.getElementById('fullUnitList');
+            list.innerHTML = "";
+
+            sentenceUnits.forEach((unitText, idx) => {
+                const item = document.createElement('div');
+                item.className = `p-3 rounded-xl border cursor-pointer transition flex items-start gap-2 ${
+                    idx === currentIndex 
+                        ? 'active-unit-card border-eco-gold bg-emerald-100/60 font-bold text-eco-blue' 
+                        : 'border-transparent hover:bg-emerald-50 text-gray-700'
+                }`;
+
+                item.onclick = () => jumpToUnit(idx);
+
+                item.innerHTML = `
+                    <span class="bg-eco-gold/30 text-eco-blue text-[11px] font-bold px-1.5 py-0.5 rounded shrink-0 mt-0.5">
+                        單元 ${idx + 1}
+                    </span>
+                    <span class="line-clamp-2 leading-snug">${unitText}</span>
+                `;
+
+                list.appendChild(item);
+            });
+
+            // Auto scroll sidebar
+            const activeElem = list.children[currentIndex];
+            if (activeElem) {
+                activeElem.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }
+        }
+
+        function updateParticipantsPoolUI() {
+            const container = document.getElementById('readerTagsContainer');
+            container.innerHTML = "";
+
+            document.getElementById('readerCountLabel').textContent = participants.length;
+            document.getElementById('readerPoolCount').textContent = participants.length;
+
+            participants.forEach(name => {
+                const tag = document.createElement('span');
+                const isUsed = !remainingParticipants.includes(name);
+
+                tag.className = `px-2.5 py-1 rounded-full text-xs font-bold border transition ${
+                    isUsed 
+                        ? 'bg-gray-100 text-gray-400 border-gray-200 line-through' 
+                        : 'bg-emerald-100/80 text-eco-blue border-eco-gold/50'
+                }`;
+                tag.textContent = name;
+                container.appendChild(tag);
+            });
+        }
+
+        function updateCounter() {
+            document.getElementById('unitCounter').textContent = `單元 ${currentIndex + 1} / ${sentenceUnits.length}`;
+        }
+
+        // Random Reader Selection Animation
+        function pickRandomReader() {
+            if (isSpinning) return;
+            if (participants.length === 0) {
+                alert("請先在名單管理中輸入參與者！");
+                returnToSetupView();
+                return;
+            }
+
+            const isUniqueMode = document.querySelector('input[name="pickModeSetup"]:checked')?.value === 'unique';
+            let pool = isUniqueMode ? remainingParticipants : participants;
+
+            if (isUniqueMode && pool.length === 0) {
+                remainingParticipants = [...participants];
+                pool = remainingParticipants;
+            }
+
+            isSpinning = true;
+            const spinBtn = document.getElementById('spinBtn');
+            const display = document.getElementById('readerDisplay');
+            spinBtn.disabled = true;
+            spinBtn.classList.add('opacity-75');
+
+            let counter = 0;
+            const totalFlips = 20;
+            const interval = setInterval(() => {
+                const tempPick = participants[Math.floor(Math.random() * participants.length)];
+                display.textContent = tempPick;
+
+                playBeep(300 + counter * 15, 0.05);
+                counter++;
+
+                if (counter >= totalFlips) {
+                    clearInterval(interval);
+                    
+                    const winnerIndex = Math.floor(Math.random() * pool.length);
+                    const winner = pool[winnerIndex];
+                    
+                    if (isUniqueMode) {
+                        remainingParticipants.splice(winnerIndex, 1);
+                    }
+
+                    display.textContent = `🎯 ${winner}`;
+                    display.classList.add('scale-105', 'text-eco-sun');
+                    
+                    playFanfare();
+                    updateParticipantsPoolUI();
+
+                    isSpinning = false;
+                    spinBtn.disabled = false;
+                    spinBtn.classList.remove('opacity-75');
+                }
+            }, 80);
+        }
+
+        function togglePinyin() {
+            showPinyin = !showPinyin;
+            document.getElementById('pinyinStatus').textContent = showPinyin ? "開啟" : "關閉";
+            document.getElementById('pinyinBtn').classList.toggle('bg-eco-gold', showPinyin);
+            document.getElementById('pinyinBtn').classList.toggle('bg-gray-300', !showPinyin);
+            updateActiveUnitDisplay();
+        }
+
+        function nextUnit() {
+            if (currentIndex < sentenceUnits.length - 1) {
+                currentIndex++;
+                updateUI();
+                stopSpeech();
+
+                if (currentIndex === sentenceUnits.length - 1) {
+                    triggerConfetti();
+                }
+            }
+        }
+
+        function prevUnit() {
+            if (currentIndex > 0) {
+                currentIndex--;
+                updateUI();
+                stopSpeech();
+            }
+        }
+
+        function jumpToUnit(index) {
+            currentIndex = index;
+            updateUI();
+            stopSpeech();
+        }
+
+        function resetProgress() {
+            currentIndex = 0;
+            remainingParticipants = [...participants];
+            document.getElementById('readerDisplay').textContent = "點擊按鈕抽取朗讀者";
+            document.getElementById('readerDisplay').classList.remove('text-eco-sun');
+            updateUI();
+            stopSpeech();
+        }
+
+        // Speak Sentence Unit (Mandarin Speech Synthesis)
+        function speakCurrentUnit() {
+            if (!synth) {
+                alert("您的瀏覽器不支援語音示範功能。");
+                return;
+            }
+
+            stopSpeech();
+
+            const text = sentenceUnits[currentIndex];
+            if (!text) return;
+
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = 'zh-CN';
+            utterance.rate = 0.85;
+
+            const voices = synth.getVoices();
+            const zhVoice = voices.find(v => v.lang.includes('zh') || v.lang.includes('CN'));
+            if (zhVoice) {
+                utterance.voice = zhVoice;
+            }
+
+            const btn = document.getElementById('speakBtn');
+            btn.classList.add('ring-4', 'ring-amber-300');
+
+            utterance.onend = function() {
+                btn.classList.remove('ring-4', 'ring-amber-300');
+            };
+
+            synth.speak(utterance);
+        }
+
+        function stopSpeech() {
+            if (synth) {
+                synth.cancel();
+                const btn = document.getElementById('speakBtn');
+                if (btn) btn.classList.remove('ring-4', 'ring-amber-300');
+            }
+        }
+
+        function triggerConfetti() {
+            if (window.confetti) {
+                confetti({
+                    particleCount: 80,
+                    spread: 70,
+                    origin: { y: 0.6 },
+                    colors: ['#D98A2B', '#163A35', '#246A52', '#C84B31']
+                });
+            }
+        }
+    </script>
+</body>
+</html>
